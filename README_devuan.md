@@ -4,7 +4,8 @@ This repository simply adds Devuan to a fork of https://github.com/johang/sd-car
 
 That project describes itself as
 ```
-a bunch of scripts to build SD card images that various single-board computers (SBC) can boot. Emphasis is on pureness; pure Debian and pure mainline U-boot.
+a bunch of scripts to build SD card images that various single-board computers (SBC) can boot.
+Emphasis is on pureness; pure Debian and pure mainline U-boot.
 ```
 
 ## Pre-built images

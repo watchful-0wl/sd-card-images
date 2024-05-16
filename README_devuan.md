@@ -7,6 +7,21 @@ That project describes itself as
 a bunch of scripts to build SD card images that various single-board computers (SBC) can boot.
 Emphasis is on pureness; pure Debian and pure mainline U-boot.
 ```
+The main implementation change is that the Dockerfile (`Dockerfile.devuan`) uses `FROM devuan/devuan:daedalus`.
+
+## Index
+- [Pre-built images](#pre-built-images)
+- [Usage](#usage)
+- - [Build your own boot image](#build-your-own-boot-image)
+- - [Build your own Devuan ext4 root filesystem image](build-your-own-devuan-ext4-root-filesystem-image)
+- [Examples](#examples)
+- - [Example boot image](#example-boot-image)
+- - - [To build a boot image for Raspberry Pi 3 B](#to-build-a-boot-image-for-raspberry-pi-3-b)
+- - - [To build a boot image for Pine64 Rockpro64](#to-build-a-boot-image-for-pine64-rockpro64)
+- - - [To build a boot image for Sinovoip Banana Pi M2 Zero](#to-build-a-boot-image-for-sinovoip-banana-pi-m2-zero)
+- - [Example root filesystem image](#example-root-filesystem-image)
+- - - [To build a Devuan ext4 root filesystem image for arm64](#to-build-a-devuan-ext4-root-filesystem-image-for-arm64)
+- - - [To build a Devuan ext4 root filesystem image for armhf](#to-build-a-devuan-ext4-root-filesystem-image-for-armhf)
 
 ## Pre-built images
 
@@ -79,11 +94,11 @@ docker run --rm \
 
 The image will end up in /tmp/sd-images on the host as `${DISTRIBUTION}-${ARCH}-${RELEASE}-${PASSWORD}.bin`.
 
-## Examples ##
+## Examples
 
-### Example boot image ###
+### Example boot image
 
-#### To build a boot image for Raspberry Pi 3 B:
+#### To build a boot image for Raspberry Pi 3 B
 
 ```bash
 docker build -t devuan/sd-images -f Dockerfile.devuan https://github.com/watchful-0wl/sd-card-images.git#add_devuan
@@ -99,7 +114,7 @@ docker run --rm \
 
 The image will end up in /tmp/sd-images on the host.
 
-#### To build a boot image for Pine64 Rockpro64:
+#### To build a boot image for Pine64 Rockpro64
 
 ```bash
 docker build -t devuan/sd-images -f Dockerfile.devuan https://github.com/watchful-0wl/sd-card-images.git#add_devuan
@@ -131,9 +146,9 @@ docker run --rm \
 
 The image will end up in /tmp/sd-images on the host.
 
-### Example root filesystem image ###
+### Example root filesystem image
 
-#### To build a Devuan ext4 root filesystem image for arm64:
+#### To build a Devuan ext4 root filesystem image for arm64
 
 ```bash
 docker build -t devuan/sd-images -f Dockerfile.devuan https://github.com/watchful-0wl/sd-card-images.git#add_devuan
@@ -146,7 +161,7 @@ docker run --rm \
 
 The image will end up in /tmp/sd-images on the host.
 
-#### To build a Devuan ext4 root filesystem image for armhf:
+#### To build a Devuan ext4 root filesystem image for armhf
 
 ```bash
 docker build -t devuan/sd-images -f Dockerfile.devuan https://github.com/watchful-0wl/sd-card-images.git#add_devuan

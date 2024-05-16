@@ -183,6 +183,13 @@ deb http://ports.ubuntu.com/ubuntu-ports ${DIST}-security main universe
 deb-src http://ports.ubuntu.com/ubuntu-ports ${DIST}-security main universe
 EOF
 	;;
+devuan-*-excalibur | devuan-*-testing)
+	# https://pkginfo.devuan.org/sources.list.txt
+	tee debian/tmp/sources.list <<-EOF
+deb http://deb.devuan.org/merged ${DIST} main
+deb-src http://deb.devuan.org/merged ${DIST} main
+EOF
+	;;
 devuan-*-ceres | devuan-*-unstable)
 	# https://pkginfo.devuan.org/sources.list.txt
 	tee debian/tmp/sources.list <<-EOF

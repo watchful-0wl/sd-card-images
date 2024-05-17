@@ -346,7 +346,7 @@ mv ${OS}/tmp/versions.csv versions.csv
 rm -f ext4.img
 # fallocate fails on some (git CI) COW filesystems, so have a coreutils alternative.
 fallocate -l 3765436416 ext4.img || truncate --size=3765436416 ext4.img
-mkfs.ext4 -d debian ext4.img
+mkfs.ext4 -d ${OS} ext4.img
 pigz ext4.img
 
 mkdir -p "${ARTIFACTS_DIR:-/artifacts}"

@@ -240,6 +240,10 @@ deb-src http://deb.devuan.org/merged ${DIST} main
 EOF
 	;;
 devuan-*)
+pwd
+
+ls -l .
+ls -l debian
 	tee debian/tmp/sources.list <<-EOF
 deb http://deb.devuan.org/merged ${DIST} main
 deb-src http://deb.devuan.org/merged ${DIST} main

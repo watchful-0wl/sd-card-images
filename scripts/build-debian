@@ -94,6 +94,11 @@ cd "${TMP}"
 # Build a Debian root filesystem (first stage)
 case ${OS} in
 debian | ubuntu)
+	RELEASE_KEY="94532124541922FB"
+	echo "Adding Devuan ${DIST} signing key (https://www.devuan.org/os/keyring):" ${RELEASE_KEY}
+	gpg --keyserver keyring.devuan.org --recv-keys ${RELEASE_KEY} && \
+	    gpg --export ${RELEASE_KEY} >/etc/apt/trusted.gpg.d/devuan_key.gpg
+
 	# Get Debian keyring when in Devuan image.
 	apt-get update && apt-get --assume-yes \
 		--no-install-recommends \
@@ -148,7 +153,7 @@ devuan)
 	echo 'deb http://deb.devuan.org/merged ${DIST} main' > /etc/apt/sources.list.d/devuan.list
 	apt-get update && apt-get --assume-yes \
 		--no-install-recommends \
-		install -t ${DIST} debootstrap
+		install --force-yes -t ${DIST} debootstrap
 
 debootstrap \
   --arch="${ARCH}" \

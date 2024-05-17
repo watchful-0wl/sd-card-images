@@ -128,7 +128,7 @@ openssh-server,\
 nano,\
 vim-tiny \
   "${TARGET}" \
-  debian \
+  devuan \
   "${URL}" \
   "${SCRIPT}"
 	;;

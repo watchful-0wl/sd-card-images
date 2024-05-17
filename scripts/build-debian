@@ -150,7 +150,7 @@ devuan)
 	    gpg --export ${RELEASE_KEY} >/etc/apt/trusted.gpg.d/devuan_key.gpg
 
 	# Get Devuan's debootstrap.
-	echo 'deb http://deb.devuan.org/merged ${DIST} main' > /etc/apt/sources.list.d/devuan.list
+	echo "deb http://deb.devuan.org/merged ${DIST} main" > /etc/apt/sources.list.d/devuan.list
 	apt-get update && apt-get --assume-yes \
 		--no-install-recommends \
 		install --force-yes -t ${DIST} debootstrap

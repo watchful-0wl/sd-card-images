@@ -1,6 +1,9 @@
 #!/bin/sh
 # Build SD card image
 
+echo "Sorry, these scripts worked yesterday."
+exit 1
+
 BOARD_ID="${1}" # For example "bananapi"
 CHIP_ID="${2}" # For example "allwinner-a10"
 DEFCONFIG="${3}" # For example "Bananapi_defconfig"

@@ -19,14 +19,11 @@ jobs:
       matrix:
         include:
           - os: devuan
-            suite: ceres
-            arch: arm64
-          - os: devuan
             suite: daedalus
-            arch: arm64
+            arch: i386
           - os: devuan
             suite: excalibur
-            arch: arm64
+            arch: i386
       fail-fast: false
 
     env:

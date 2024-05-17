@@ -268,7 +268,7 @@ cp -rv --preserve=mode ../2nd-stage-files/pre-2nd-stage-files/* ${OS}
 cp -rv --preserve=mode ../2nd-stage-files/pre-2nd-stage-files-${ARCH}/* ${OS}
 
 # Copy ARM emulation stuff
-cp -v /usr/bin/qemu-*-static ${OS}/usr/bin || :
+cp -v /usr/bin/qemu-*-static ${OS}/usr/bin || true
 
 # Build a Debian root filesystem (second stage)
 case "${OS}" in

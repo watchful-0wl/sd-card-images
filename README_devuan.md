@@ -13,7 +13,7 @@ The main implementation change is that the Dockerfile (`Dockerfile.devuan`) uses
 - [Pre-built images](#pre-built-images)
 - [Usage](#usage)
 - - [Build your own boot image](#build-your-own-boot-image)
-- - [Build your own Devuan ext4 root filesystem image](build-your-own-devuan-ext4-root-filesystem-image)
+- - [Build your own Devuan ext4 root filesystem image](#build-your-own-devuan-ext4-root-filesystem-image)
 - [Examples](#examples)
 - - [Example boot image](#example-boot-image)
 - - - [To build a boot image for Raspberry Pi 3 B](#to-build-a-boot-image-for-raspberry-pi-3-b)

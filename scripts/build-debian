@@ -113,6 +113,39 @@ nano \
   "${SCRIPT}"
 	;;
 devuan)
+	# Need Devuan's keys and Devuan's debootstrap.
+	case ${DIST} in
+	ceres | beowulf | chimaera | daedalus)
+		# https://www.devuan.org/os/keyring
+		# Ceres, Beowulf, Chimaera and Daedalus
+		RELEASE_KEY="94532124541922FB"
+		;;
+	excalibur)
+		RELEASE_KEY="B3982868D104092C"
+		;;
+	freia)
+		RELEASE_KEY="55C470D57732684B"
+		;;
+	*)
+		echo "Can't decide release key for \"${DIST}\""
+		exit 1
+		;;
+	esac
+
+	# Use Ubuntu's gpg to get Devuan's signing key.
+	apt-get update && apt-get install -y gpg
+
+	# Add Devuan's signing key.
+	echo "Adding Devuan ${DIST} signing key (https://www.devuan.org/os/keyring):" ${RELEASE_KEY}
+	gpg --keyserver keyring.devuan.org --recv-keys ${RELEASE_KEY} && \
+	    gpg --export ${RELEASE_KEY} >/etc/apt/trusted.gpg.d/devuan_key.gpg
+
+	# Get Devuan's debootstrap.
+	echo 'deb http://deb.devuan.org/merged ${DIST} main' > /etc/apt/sources.list.d/devuan.list
+	apt-get update && apt-get --assume-yes \
+		--no-install-recommends \
+		install -t ${DIST} debootstrap
+
 debootstrap \
   --arch="${ARCH}" \
   --verbose \

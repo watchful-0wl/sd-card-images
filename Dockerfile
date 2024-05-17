@@ -21,6 +21,7 @@ RUN apt-get update && \
                     bison \
                     flex \
                     python3-dev \
+                    python3-lxml \
                     python3-pkg-resources \
                     python3-pyelftools \
                     python3-setuptools \

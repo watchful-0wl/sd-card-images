@@ -21,12 +21,6 @@ jobs:
           - os: devuan
             suite: daedalus
             arch: i386
-          - os: devuan
-            suite: excalibur
-            arch: i386
-          - os: devuan
-            suite: ceres
-            arch: i386
       fail-fast: false
 
     env:

@@ -1,9 +1,6 @@
 #!/bin/sh
 # Build Debian root filesystem
 
-echo "Sorry, these scripts worked yesterday."
-exit 1
-
 OS="$1" # For example "debian"
 ARCH="$2" # For example "armhf"
 DIST="$3" # For example "buster"

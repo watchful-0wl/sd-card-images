@@ -1,9 +1,28 @@
 FROM public.ecr.aws/ubuntu/ubuntu:24.04
 ENV DEBIAN_FRONTEND=noninteractive
+
+# Need Devuan's debootstrap, which also supports Debian and Ubuntu.
+# Use Ubuntu's gpg to get Devuan's signing key.
+RUN apt-get update && apt-get install -y gpg
+
+# Add Devuan's signing key.
+ARG RELEASE_KEY="94532124541922FB" # ceres key - https://www.devuan.org/os/keyring
+RUN echo "Adding Devuan ceres signing key (https://www.devuan.org/os/keyring):" ${RELEASE_KEY}
+RUN gpg --keyserver keyring.devuan.org --recv-keys ${RELEASE_KEY} && \
+    gpg --export ${RELEASE_KEY} >/etc/apt/trusted.gpg.d/devuan_key.gpg
+
+# Get Devuan's debootstrap.
+RUN echo 'deb http://deb.devuan.org/merged ceres main ' > /etc/apt/sources.list.d/devuan.list
 RUN apt-get update && \
     apt-get --assume-yes \
             --no-install-recommends \
-            install debootstrap \
+            install -t ceres debootstrap
+
+# Install everything else but debootstrap from Ubuntu.
+RUN apt-get update && \
+    apt-get --assume-yes \
+            --no-install-recommends \
+            install -t noble \
                     debian-archive-keyring \
                     ca-certificates \
                     qemu-user \
@@ -21,7 +40,6 @@ RUN apt-get update && \
                     bison \
                     flex \
                     python3-dev \
-                    python3-lxml \
                     python3-pkg-resources \
                     python3-pyelftools \
                     python3-setuptools \

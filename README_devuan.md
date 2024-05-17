@@ -78,9 +78,9 @@ The image will end up in /tmp/sd-images on the host as `${BOARD_ID}.bin.gz`.
 For any valid combination provided by the distribution:
   |Variable      |   |   |   |
   |--------------|---|---|---|
-  | DISTRIBUTION | Devuan | Debian | Ubuntu |
+  | DISTRIBUTION | **Devuan** | Debian | Ubuntu |
   | ARCH         | armhf, arm64, i386, amd64 | armhf, arm64, i386, amd64 | armhf, arm64, i386, amd64 |
-  | RELEASE      | e.g. daedalus, excalibur, ceres | e.g bookworm, trixie, sid | e.g. focal, jammy, noble |
+  | RELEASE      | e.g. **daedalus**, excalibur, ceres | e.g bookworm, trixie, sid | e.g. focal, jammy, noble |
 
 To build:
 ```bash

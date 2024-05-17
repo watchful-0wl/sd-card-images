@@ -94,6 +94,10 @@ cd "${TMP}"
 # Build a Debian root filesystem (first stage)
 case ${OS} in
 debian | ubuntu)
+	# Get Debian keyring when in Devuan image.
+	apt-get update && apt-get --assume-yes \
+		--no-install-recommends \
+		install debian-archive-keyring
 debootstrap \
   --arch="${ARCH}" \
   --verbose \

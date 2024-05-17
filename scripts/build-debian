@@ -227,24 +227,20 @@ EOF
 	;;
 devuan-*-excalibur | devuan-*-testing)
 	# https://pkginfo.devuan.org/sources.list.txt
-	tee debian/tmp/sources.list <<-EOF
+	tee devuan/tmp/sources.list <<-EOF
 deb http://deb.devuan.org/merged ${DIST} main
 deb-src http://deb.devuan.org/merged ${DIST} main
 EOF
 	;;
 devuan-*-ceres | devuan-*-unstable)
 	# https://pkginfo.devuan.org/sources.list.txt
-	tee debian/tmp/sources.list <<-EOF
+	tee devuan/tmp/sources.list <<-EOF
 deb http://deb.devuan.org/merged ${DIST} main
 deb-src http://deb.devuan.org/merged ${DIST} main
 EOF
 	;;
 devuan-*)
-pwd
-
-ls -l .
-ls -l debian
-	tee debian/tmp/sources.list <<-EOF
+	tee devuan/tmp/sources.list <<-EOF
 deb http://deb.devuan.org/merged ${DIST} main
 deb-src http://deb.devuan.org/merged ${DIST} main
 deb http://deb.devuan.org/merged ${DIST}-updates main
@@ -268,11 +264,11 @@ EOF
 	;;
 esac
 
-cp -rv --preserve=mode ../2nd-stage-files/pre-2nd-stage-files/* debian
-cp -rv --preserve=mode ../2nd-stage-files/pre-2nd-stage-files-${ARCH}/* debian
+cp -rv --preserve=mode ../2nd-stage-files/pre-2nd-stage-files/* ${OS}
+cp -rv --preserve=mode ../2nd-stage-files/pre-2nd-stage-files-${ARCH}/* ${OS}
 
 # Copy ARM emulation stuff
-cp -v /usr/bin/qemu-*-static debian/usr/bin || :
+cp -v /usr/bin/qemu-*-static ${OS}/usr/bin || :
 
 # Build a Debian root filesystem (second stage)
 case "${OS}" in
@@ -301,7 +297,7 @@ EOF
 	;;
 devuan)
 	# Build a Devuan root filesystem (second stage)
-chroot debian /bin/sh -ex <<-EOF
+chroot devuan /bin/sh -ex <<-EOF
 /debootstrap/debootstrap --second-stage
 /bin/mv /tmp/sources.list /etc/apt/sources.list
 # /usr/bin/apt-key add /etc/apt/trusted.gpg.d/devuan_key.gpg
@@ -322,12 +318,12 @@ EOF
 esac
 
 # Remove ARM emulation stuff again
-rm -v debian/usr/bin/qemu-*-static || :
+rm -v ${OS}/usr/bin/qemu-*-static || :
 
-cp -rv --preserve=mode ../2nd-stage-files/post-2nd-stage-files/* debian
+cp -rv --preserve=mode ../2nd-stage-files/post-2nd-stage-files/* ${OS}
 
 # Set hostname
-echo "${OS}" > debian/etc/hostname
+echo "${OS}" > ${OS}/etc/hostname
 
 # Set resolv.conf
 case "${OS}" in
@@ -335,14 +331,14 @@ debian | ubuntu)
 	ln -sf /run/systemd/resolve/stub-resolv.conf debian/etc/resolv.conf
 	;;
 devuan)
-	ln -sf /run/connman/resolv.conf debian/etc/resolv.conf
+	ln -sf /run/connman/resolv.conf devuan/etc/resolv.conf
 	;;
 esac
 
 # List all files
-find debian ! -type d -printf "/%P\n" | sort > files.txt
+find ${OS} ! -type d -printf "/%P\n" | sort > files.txt
 
-mv debian/tmp/versions.csv versions.csv
+mv ${OS}/tmp/versions.csv versions.csv
 
 # Make a ext4 filesystem of this and put it into the image
 # >>> ((3800000000 - 32 * 1024 * 1024) // (1024 * 1024)) * (1024 * 1024)

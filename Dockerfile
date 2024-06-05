@@ -1,4 +1,4 @@
-FROM devuan/devuan:daedalus.
+FROM devuan/devuan:daedalus
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-get --assume-yes \

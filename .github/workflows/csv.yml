@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-            ref: add_devuan
+            ref:  add_devuan
 
       - name: Rebuild
         timeout-minutes: 5

@@ -14,19 +14,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+            ref: add_devuan
 
       - name: Rebuild
         timeout-minutes: 5
         run: |
           set -e
-          git config user.name "Johan Gunnarsson"
-          git config user.email "johan.gunnarsson@gmail.com"
+          git config user.name "watchful-0wl"
+          git config user.email "watchful@tagmar.net"
           ./metascripts/rebuild-debian-csv
           git add debians-arm.csv debians-x86.csv
-          if git commit -m "debians: Update Debian/Ubuntu versions"; then
+          if git commit -m "debians: Update Devuan/Debian/Ubuntu versions"; then
             ./metascripts/rebuild-jekyll-boards
             git add -A docs
             if git commit -m "docs: Regenerate boards"; then
-              git push origin
+              git push origin add_devuan
             fi
           fi
